@@ -1,4 +1,4 @@
-This project was bootstrapped with https://watches-portal.web.app/
+This project was bootstrapped with 
 
 ## Available Scripts
 

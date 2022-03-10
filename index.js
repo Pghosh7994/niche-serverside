@@ -1,5 +1,5 @@
 const express = require("express");
-const { MongoClient } = require("mongodb");
+const { MongoClient, ServerApiVersion } = require("mongodb");
 const cors = require("cors");
 const ObjectId = require("mongodb").ObjectId;
 require("dotenv").config();
@@ -12,17 +12,25 @@ app.use(cors());
 app.use(express.json());
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.e4tmo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+//const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.e4tmo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
-async function run() {
-  await client.connect();
-  console.log('database connected');
-}
-run().catch(console.dir);
+// const client = new MongoClient(uri, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+// console.log(uri);
+// async function run() {
+//   try {
+//     await client.connect();
+//     console.log('database connected success');
+//   }
+//   finally {
+//     await client.close();
+//   }
+// }
+// run().catch(console.dir);
 
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.listen(port, () => {
